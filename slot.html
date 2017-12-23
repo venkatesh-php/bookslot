@@ -1,0 +1,183 @@
+<html>
+    <head>
+        <title>Book A Slot For Mock Interviews</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
+        
+        
+        
+        
+        <script type="text/javascript">
+            
+            
+          
+        </script> 
+
+    </head>
+    <body>
+        <div style="width:auto; height:auto; background-color: rgba(182, 238, 182, 0.521);">
+            <h1><center>Ameyem Mock interview<br>Slot Booking</center></h1>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="section-title">Enter Your Details</h3>
+                    <p>
+                       
+                    </p>
+                
+                    <form action="bookslot.php" method="post" class="form-light mt-20" role="form">
+                        <div class="form-group">
+                            <label for="name">Name*</label>
+                            <input type="text" name="name" id="name" class="form-control" placeholder="Your name" required>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="email">Email*</label>
+                                    <input type="email" name="email" id="email" class="form-control" placeholder="Email address" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="phone">Phone*</label>
+                                    <input type="text" name="phone" id="phone" class="form-control" placeholder="Phone number" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Branch In B-tech or B.Sc</label>
+                            <input type="text" name="subject" id="subject" class="form-control" placeholder="Subject" required>
+                        </div>
+						
+						<div class="row">
+							<div class="col-md-2">
+								<div class="form-group">
+									<label for="message">Select Date For interview</label>
+									<div id="date" >
+                                        <input type="text" id="date">
+                                    
+                                    </div>
+
+								</div>
+                            </div>
+							<div class="col-md-8">						
+								<div class="form-group">
+									<label for="message">Select Slot</label><br><br>
+                                    <div id="slot" >
+                                        <input type="text" id="slot">
+                                    </div>  
+                                                           
+								</div>
+							</div>
+						</div>
+						<div>
+                            <button type="submit" onclick="myFunction()" class="btn btn-two">Book Your Slot</button><p><br/></p>
+                        </div>   
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+
+            var dates=["2017-12-26","27/12/2017","28/12/2017","29/12/2017","30/12/2017"]
+            var datecontent = document.getElementById("date");
+            for (j=0; j<5; j++){
+                datecontent.innerHTML +=  '<input type="button" onclick="sendtoDatabase()" id="button'+j+'" class="dateclass btn btn-primary" value="' +dates[j]+'">';
+            }
+
+            var timeslots=["10:00","10:30","11:00","11:30","12:00","12:30","01:00","02:30","03:00","03:30","04:00","04:30"]
+            var buttoncontent = document.getElementById("slot");
+           for(let k=0; k<5; k++){
+
+        
+            for (let i=0; i<12; i++){
+
+                    buttoncontent.innerHTML +=  '<input type="button" onclick="sendtoDatabase()" id="button'+i+'" class="timeclass btn btn-success" value="' +timeslots[i]+'">';
+                    
+
+                }
+            }
+                
+        
+
+            var buttons= document.getElementsByClassName('dateclass')
+                // console.log(buttons)
+                for (let i=0;i<buttons.length;i+=1){
+                    // console.log(buttons[i]);
+                    buttons[i].addEventListener('click',()=>{
+                        console.log(buttons[i].value);
+                        var date = buttons[i].value;
+                    });
+                    
+                }
+
+            var buttons1= document.getElementsByClassName('timeclass')
+                // console.log(buttons)
+                for (let i=0;i<buttons1.length;i+=1){
+                    // console.log(buttons[i]);
+                    buttons1[i].addEventListener('click',()=>{
+                        console.log(buttons1[i].value);
+                        var slot = buttons1[i].value;
+                    });
+                    
+                }
+
+            function sendtoDatabase(){
+                //  console.log("Hello")
+                
+                 var date = document.getElementById("date").value;
+                 var slot = document.getElementById("slot").value;
+            }
+
+
+            // var HttpClient = function() {
+            //     var aUrl = './bookslot.php?time='+time+'&name='+name+'&email='+email+'&phone='+phone+'&subject='+subject;
+            //     this.get = function(aUrl, aCallback) {
+            //         var anHttpRequest = new XMLHttpRequest();
+            //         anHttpRequest.onreadystatechange = function() { 
+            //             if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
+            //             aCallback(anHttpRequest.responseText);
+            //             }
+            //         anHttpRequest.open( "GET", aUrl, true );            
+            //         anHttpRequest.send( null );
+            //     }
+            //     }
+            function myFunction() {
+                var name = document.getElementById("name").value;
+                var email = document.getElementById("email").value;
+                var phone = document.getElementById("phone").value;
+                var subject = document.getElementById("subject").value;
+                var date = document.getElementsById("date").value;
+                var slot = document.getElementsById("slot").value;
+                 
+                var dataString =  '&name=' + name + '&email=' + email + '&phone=' + phone + '&subject=' + subject + '&date=' + date + '&slot=' + slot;
+                 if (name == '' || email == '' || phone == '' || subject == '' || date == '' || slot == '')
+                 {
+                     alert("please fill all fields");
+                 }        
+                 else{
+                     $.ajax({
+                         type: "POST",
+                         url: "bookslot.php",
+                         data: dataString,
+                         cache: false,
+                         success: function(html)
+                         {
+                             alert(html);
+                         }
+                     });
+                 }
+                 return false;
+                }//function closing
+
+        </script>
+
+        
+    </body>
+</html>
